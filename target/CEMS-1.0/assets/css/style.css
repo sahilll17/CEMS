@@ -1,0 +1,907 @@
+/* ==========================================================================
+   Chandigarh University - College Event Management System (CEMS)
+   MCA 1st Semester Mini Project - Clean Academic Design System
+   ========================================================================== */
+
+:root {
+  --font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Classic Academic Color Palette */
+  --primary: #0d6efd;
+  --primary-dark: #0b5ed7;
+  --primary-navy: #1a365d;
+  --secondary: #6c757d;
+  --success: #198754;
+  --danger: #dc3545;
+  --warning: #ffc107;
+  --info: #0dcaf0;
+
+  /* Neutral Backgrounds & Text */
+  --bg-page: #f4f6f9;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --text-dark: #212529;
+  --text-muted: #6c757d;
+  --border-color: #dee2e6;
+  --border-focus: #86b7fe;
+
+  /* Standard Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  /* Simple Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 15px;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-page);
+  color: var(--text-dark);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #1a202c;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.1rem; }
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* Layout Container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.main-content {
+  flex: 1;
+  padding: 1.5rem 0 3rem;
+}
+
+/* ==========================================================================
+   Navigation Bar - Classic Academic Navy Blue Bar
+   ========================================================================== */
+.navbar {
+  background-color: var(--primary-navy);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.brand:hover {
+  text-decoration: none;
+}
+
+.brand-logo-icon {
+  width: 38px;
+  height: 38px;
+  background-color: #ffffff;
+  color: var(--primary-navy);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.brand-title span {
+  color: #60a5fa;
+}
+
+.brand-subtitle {
+  font-size: 0.75rem;
+  color: #cbd5e1;
+}
+
+.mobile-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-size: 1.2rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nav-link {
+  color: #e2e8f0;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: background-color 0.2s;
+  text-decoration: none;
+}
+
+.nav-link:hover, .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.badge-counter {
+  background-color: var(--danger);
+  color: #ffffff;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 10px;
+  margin-left: 0.25rem;
+}
+
+/* User pill in nav */
+.user-nav-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  margin-left: 0.5rem;
+}
+
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease-in-out;
+  line-height: 1.4;
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background-color: #5c636a;
+  border-color: #565e64;
+  color: #ffffff;
+}
+
+.btn-success {
+  background-color: var(--success);
+  border-color: var(--success);
+  color: #ffffff;
+}
+
+.btn-success:hover {
+  background-color: #157347;
+  border-color: #146c43;
+  color: #ffffff;
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background-color: #bb2d3b;
+  border-color: #b02a37;
+  color: #ffffff;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border-color: var(--border-color);
+  color: #495057;
+}
+
+.btn-outline:hover {
+  background-color: #e9ecef;
+  color: #212529;
+}
+
+.btn-sm {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.82rem;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.4rem;
+  font-size: 1.05rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ==========================================================================
+   Cards & Layout Components
+   ========================================================================== */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+}
+
+.card-hover {
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.card-hover:hover {
+  border-color: #b0c4de;
+  box-shadow: var(--shadow-md);
+}
+
+/* Stat Cards (Simple MCA Mini Project KPI blocks) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-card:nth-child(2) {
+  border-left-color: var(--success);
+}
+
+.stat-card:nth-child(3) {
+  border-left-color: var(--info);
+}
+
+.stat-card:nth-child(4) {
+  border-left-color: var(--warning);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  background-color: #eef2ff !important;
+  color: var(--primary) !important;
+}
+
+.stat-card:nth-child(2) .stat-icon {
+  background-color: #ecfdf5 !important;
+  color: var(--success) !important;
+}
+
+.stat-card:nth-child(3) .stat-icon {
+  background-color: #f0fdf4 !important;
+  color: #0284c7 !important;
+}
+
+.stat-card:nth-child(4) .stat-icon {
+  background-color: #fffbeb !important;
+  color: #d97706 !important;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Forms & Inputs
+   ========================================================================== */
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.4rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.92rem;
+  font-family: inherit;
+  color: var(--text-dark);
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  outline: 0;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.table th, .table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+.table th {
+  background-color: #f8fafc;
+  color: #334155;
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #fbfcfd;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* ==========================================================================
+   Badges (Simple Clean Categorization)
+   ========================================================================== */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1;
+}
+
+.badge-hackathon { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+.badge-workshop { background-color: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+.badge-technical { background-color: #ede9fe; color: #5b21b6; border: 1px solid #ddd6fe; }
+.badge-cultural { background-color: #fce7f3; color: #9d174d; border: 1px solid #fbcfe8; }
+.badge-sports { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+.badge-seminar { background-color: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+
+.badge-approved { background-color: #d1fae5; color: #065f46; }
+.badge-pending { background-color: #fef3c7; color: #92400e; }
+.badge-rejected { background-color: #fee2e2; color: #991b1b; }
+.badge-cancelled { background-color: #f3f4f6; color: #4b5563; }
+.badge-attended { background-color: #dcfce7; color: #15803d; }
+
+/* ==========================================================================
+   Alerts
+   ========================================================================== */
+.alert {
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.92rem;
+}
+
+.alert-success {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+}
+
+.alert-danger {
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+}
+
+.alert-warning {
+  color: #664d03;
+  background-color: #fff3cd;
+  border-color: #ffecb5;
+}
+
+.alert-info {
+  color: #055160;
+  background-color: #cff4fc;
+  border-color: #b6effb;
+}
+
+.alert-close {
+  background: transparent;
+  border: 0;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.6;
+  margin-left: 1rem;
+}
+
+.alert-close:hover {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Filter Bar & Category Pills
+   ========================================================================== */
+.filter-bar {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-categories {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  color: #4b5563;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.filter-pill:hover {
+  background-color: #e5e7eb;
+}
+
+.filter-pill.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Event Grid & Cards
+   ========================================================================== */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.event-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.event-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.event-image-wrap {
+  position: relative;
+  height: 180px;
+  background-color: #e2e8f0;
+}
+
+.event-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-category-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+}
+
+.event-date-chip {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.event-content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.event-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.65rem;
+  color: #1e293b;
+}
+
+.event-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.meta-icon {
+  width: 16px;
+  color: var(--primary);
+}
+
+.progress-bar-bg {
+  background-color: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background-color: var(--primary);
+  height: 100%;
+}
+
+.progress-fill.full {
+  background-color: var(--danger);
+}
+
+/* ==========================================================================
+   Student Event Pass / Ticket Slip (Authentic Semester 1 Mini-Project Ticket)
+   ========================================================================== */
+.ticket-wrapper {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.digital-ticket {
+  background-color: #ffffff;
+  border: 2px solid var(--primary-navy);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.ticket-header {
+  background-color: var(--primary-navy);
+  color: #ffffff;
+  padding: 1.5rem;
+  border-bottom: 2px dashed #93c5fd;
+}
+
+.ticket-institution {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  letter-spacing: 0.5px;
+}
+
+.ticket-event-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0.5rem 0;
+}
+
+.ticket-body {
+  padding: 1.5rem;
+}
+
+.ticket-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.ticket-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-field-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #64748b;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.2rem;
+}
+
+.ticket-field-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.ticket-qr-section {
+  background-color: #f8fafc;
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.ticket-ref-code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.35rem;
+  font-weight: bold;
+  color: var(--primary-navy);
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+  background-color: #1e293b;
+  color: #cbd5e1;
+  padding: 2rem 0;
+  margin-top: auto;
+  border-top: 3px solid var(--primary);
+  font-size: 0.88rem;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-copy p {
+  color: #94a3b8;
+  margin-top: 0.25rem;
+}
+
+.footer a {
+  color: #93c5fd;
+}
+
+.footer a:hover {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Print Stylesheet
+   ========================================================================== */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  .navbar, .footer, .no-print, .alert {
+    display: none !important;
+  }
+  .main-content {
+    padding: 0 !important;
+  }
+  .digital-ticket {
+    border: 2px solid #000000 !important;
+    box-shadow: none !important;
+  }
+  .ticket-header {
+    background-color: #f1f5f9 !important;
+    color: #000000 !important;
+    border-bottom: 2px solid #000000 !important;
+  }
+  .ticket-event-title, .ticket-institution {
+    color: #000000 !important;
+  }
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 768px) {
+  .mobile-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .user-nav-dropdown {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+  }
+
+  .ticket-grid {
+    grid-template-columns: 1fr;
+  }
+}
